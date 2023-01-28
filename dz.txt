@@ -1,0 +1,9 @@
+1)asyncio изучить, почитать, создать для себя тестовый файл в кот буду запускать asyncio (документация, видосы)
+2)asyncio.create_task (чем отличается от Celery?)
+3)httpx vs requests
+4)https://doramy.club/serialy спарсить асинхронно (mongodb + sqlalchemy)  *write all separately (requests, parsing, saving data)
+
+
+
+
+
