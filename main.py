@@ -9,6 +9,7 @@ class DoramaScraper:
     ORIGINAL_URL = "https://doramy.club/serialy"
     MAIN_URL = "https://doramy.club/serialy/page/{}"
     SERIAL_URL = '//div[@class="post-home"]/a/@href'
+    SERIAL_DETAIL_URL = '//link[@rel="canonical"]/@href'
     TITLE = '//h1[@itemprop="name"]/text()'
     SERIES = '//tbody[@class="tbody-sin"]//tr[2]/td[2]/text()'
     COUNTRY = '//tr[.//td[text()="Страна:"]]/td[2]/text()'
@@ -46,7 +47,9 @@ class DoramaScraper:
 
     async def save_data(self, content):
         tree = Selector(text=content)
-        url = tree.xpath(self.SERIAL_URL).get()
+        print(tree)
+        url = tree.xpath(self.SERIAL_DETAIL_URL).extract_first()
+        # print(url)
         title = tree.xpath(self.TITLE).extract_first()
         series = tree.xpath(self.SERIES).extract_first()
         country = tree.xpath(self.COUNTRY).extract_first()
@@ -64,7 +67,7 @@ class DoramaScraper:
             "image": image,
             "date": Mongo_DB.dorama_collection.get("date"),
         }
-        print(serial_data)
+        # print(serial_data)
         await self.mongo_database.add_to_dorama_collection(dorama_objects=serial_data)
 
     async def main(self):

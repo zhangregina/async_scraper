@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  mongo_db: # имя сервиса
+    container_name: mongo-db
+    image: mongo:5.0
+    restart: always # может упасть контейнер из-за плохое соединение с докерхаб, неправильные команды в докеркомпозе и.т.д.
+    volumes:
+      - './data:/data/db'
+    ports:
+      - "27017:27017" # внешний порт: внутренний порт
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: zhangregina
+      MONGO_INITDB_ROOT_PASSWORD: mongodbzhregina
